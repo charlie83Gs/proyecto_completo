@@ -1,0 +1,34 @@
+<%= form_with(model: muestreo, local: true) do |form| %>
+  <% if muestreo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(muestreo.errors.count, "error") %> prohibited this muestreo from being saved:</h2>
+
+      <ul>
+      <% muestreo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha_inicio %>
+    <%= form.datetime_select :fecha_inicio, id: :muestreo_fecha_inicio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_fin %>
+    <%= form.datetime_select :fecha_fin, id: :muestreo_fecha_fin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :meta %>
+    <%= form.number_field :meta, id: :muestreo_meta %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

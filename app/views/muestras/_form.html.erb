@@ -1,0 +1,32 @@
+<%= form_with(model: muestra, local: true) do |form| %>
+  <% if muestra.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(muestra.errors.count, "error") %> prohibited this muestra from being saved:</h2>
+
+      <ul>
+      <% muestra.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :hora %>
+    <%= form.datetime_select :hora, id: :muestra_hora %>
+  </div>
+
+  <div class="field">
+    <%= form.label :humedad %>
+    <%= form.text_field :humedad, id: :muestra_humedad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temperatura %>
+    <%= form.text_field :temperatura, id: :muestra_temperatura %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Muestreos</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Fecha inicio</th>
+      <th>Fecha fin</th>
+      <th>Meta</th>
+      <th>Proyecto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @muestreos.each do |muestreo| %>
+    <% if muestreo.proyecto_id == @proy_id %>
+      <tr>
+        <td><%= muestreo.fecha_inicio %></td>
+        <td><%= muestreo.fecha_fin %></td>
+        <td><%= muestreo.meta %></td>
+        <td><%= muestreo.proyecto_id %></td>
+        <td><%= link_to 'Show', muestreo %></td>
+        <td><%= link_to 'Edit', edit_muestreo_path(muestreo) %></td>
+        <td><%= link_to 'Destroy', muestreo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Muestras', muestras_path(muestreo_id: muestreo.id, from_muestreo: true) %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Muestreo', new_muestreo_path %>
+<%= link_to 'Back', proyectos_path %>

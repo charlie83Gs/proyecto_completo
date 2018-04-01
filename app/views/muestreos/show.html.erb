@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha inicio:</strong>
+  <%= @muestreo.fecha_inicio %>
+</p>
+
+<p>
+  <strong>Fecha fin:</strong>
+  <%= @muestreo.fecha_fin %>
+</p>
+
+<p>
+  <strong>Meta:</strong>
+  <%= @muestreo.meta %>
+</p>
+
+<p>
+  <strong>Proyecto:</strong>
+  <%= @muestreo.proyecto_id %>
+</p>
+
+<%= link_to 'Edit', edit_muestreo_path(@muestreo) %> |
+<%= link_to 'Back', muestreos_path %>

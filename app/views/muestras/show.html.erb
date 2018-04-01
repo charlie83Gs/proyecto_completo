@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hora:</strong>
+  <%= @muestra.hora %>
+</p>
+
+<p>
+  <strong>Humedad:</strong>
+  <%= @muestra.humedad %>
+</p>
+
+<p>
+  <strong>Temperatura:</strong>
+  <%= @muestra.temperatura %>
+</p>
+
+<%= link_to 'Edit', edit_muestra_path(@muestra) %> |
+<%= link_to 'Back', muestras_path %>

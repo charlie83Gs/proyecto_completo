@@ -1,0 +1,32 @@
+<%= form_with(model: tarea, local: true) do |form| %>
+  <% if tarea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tarea.errors.count, "error") %> prohibited this tarea from being saved:</h2>
+
+      <ul>
+      <% tarea.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :tarea_nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <%= form.text_area :descripcion, id: :tarea_descripcion %>
+  </div>
+
+   <div class="field">
+    <%= form.label :pro_type %>
+    <%= form.number_field :pro_type, id: :tarea_pro_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Proyectos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha inicio</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr> 
+  </thead>
+
+  <tbody>
+    <% @proyectos.each do |proyecto| %>
+      <tr>
+        <td><%= proyecto.fecha_inicio %></td>
+        <td><%= proyecto.descripcion %></td>
+        <td><%= link_to 'Show', proyecto %></td>
+        <td><%= link_to 'Edit', edit_proyecto_path(proyecto) %></td>
+        <td><%= link_to 'Destroy', proyecto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><td><%= link_to 'Muestreos', muestreos_path(:proyecto_id => proyecto.id, :from_proyecto => true) %></td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if @can_create == true %>
+<%= link_to 'New Proyecto', new_proyecto_path%>
+<%= link_to 'Administrar Tareas', tareas_path%>
+<% end %>
+
