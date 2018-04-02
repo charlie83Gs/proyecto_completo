@@ -15,5 +15,25 @@
   <%= @muestra.temperatura %>
 </p>
 
+<p>
+  <strong>Empleado:</strong>
+  <%= @empleado.nombre%>
+</p>
+
+<p>
+  <strong>Tarea:</strong>
+  <%= @tarea.nombre%>
+</p>
+<p>
+	<strong>Productividad:</strong>
+	<% if(@tarea.pro_type == 0)%>
+	<%= "Improductiva" %>
+	<% elsif(@tarea.pro_type == 1)%>
+	<%= "Colaborativa" %>
+	<% else %>
+	<%= "Productiva" %>
+	<% end %>
+</p>
+
 <%= link_to 'Edit', edit_muestra_path(@muestra) %> |
 <%= link_to 'Back', muestras_path %>

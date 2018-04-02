@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222042133) do
+ActiveRecord::Schema.define(version: 20180402061430) do
 
   create_table "empleados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180222042133) do
     t.integer "tipo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "proyecto_id"
   end
 
   create_table "muestras", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -27,6 +28,8 @@ ActiveRecord::Schema.define(version: 20180222042133) do
     t.float "temperatura", limit: 24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tarea_id"
+    t.integer "empleado_id"
     t.index ["muestreo_id"], name: "index_muestras_on_muestreo_id"
   end
 

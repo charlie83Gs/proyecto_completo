@@ -6,13 +6,17 @@ class MuestreosController < ApplicationController
   def index
     
 
-    @muestreos = Muestreo.all
+    
   
     if params[:from_proyecto]
         session[:proyecto_id] = params[:proyecto_id]
     end
-    @proy_id = session[:proyecto_id].to_i
-    
+    proy_id = session[:proyecto_id].to_i
+    @muestreos = Muestreo.where(proyecto_id: proy_id).all
+
+    if(@muestreos == nil)
+        @muestreos = {}
+    end
   end
 
   # GET /muestreos/1

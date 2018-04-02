@@ -25,7 +25,14 @@
     <%= form.label :temperatura %>
     <%= form.text_field :temperatura, id: :muestra_temperatura %>
   </div>
-
+  <div>
+    <%= form.label :tarea %>
+    <%= form.collection_select :tarea_id, Tarea.all, :id, :nombre%>
+  </div>
+  <div>
+    <%= form.label :empleado %>
+    <%= form.collection_select :empleado_id, Empleado.where(proyecto_id: @proy_id).all, :id, :nombre %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

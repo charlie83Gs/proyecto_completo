@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Administrar Usuarios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>nombre</th>
+      <th colspan="3"></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= usuario.email %></td>
+        <td><%= usuario.name %></td>
+        <td><%= link_to 'Destroy', admin_destroy_user_path(usuario), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      	<td><% if (usuario.permission < 1)%>
+      		<%= link_to 'Ascender', ascender_usuario_path(:usuario_id =>usuario.id), method: :update, data: { confirm: 'Are you sure?' } %>
+      		<% else %>
+      		<%= link_to 'Descender', descender_usuario_path(:usuario_id =>usuario.id), method: :update, data: { confirm: 'Are you sure?' } %>
+      		<% end %>
+      		</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Empleado', new_empleado_path %>
+<%= link_to 'Volver', proyectos_path %>

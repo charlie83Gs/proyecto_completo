@@ -8,18 +8,28 @@ class MuestrasController < ApplicationController
     if params[:from_muestreo]
         session[:muestreo_id] = params[:muestreo_id]
     end
-    #@proy_id = session[:proyecto_id].to_i
+    
     @muest_id = session[:muestreo_id].to_i
+    #@empleados = Empleado.where(proyecto_id: session[:proyecto_id].to_i).all
+    #puts(@proy_id)
+    @can_create = false
+    if current_user.permission > 0
+      @can_create = true
+    end
   end
 
   # GET /muestras/1
   # GET /muestras/1.json
   def show
+     muestra = Muestra.find(params[:id])
+     @empleado = Empleado.find(muestra.empleado_id)
+     @tarea = Tarea.find(muestra.tarea_id)
   end
 
   # GET /muestras/new
   def new
     @muestra = Muestra.new
+    @proy_id = session[:proyecto_id].to_i
   end
 
   # GET /muestras/1/edit
@@ -79,6 +89,6 @@ class MuestrasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def muestra_params
-      params.require(:muestra).permit(:hora, :humedad, :temperatura)
+      params.require(:muestra).permit(:hora, :humedad, :temperatura,:tarea_id,:empleado_id)
     end
 end

@@ -8,6 +8,7 @@
       <th>Hora</th>
       <th>Humedad</th>
       <th>Temperatura</th>
+      <th>Tarea</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,9 +20,12 @@
         <td><%= muestra.hora %></td>
         <td><%= muestra.humedad %></td>
         <td><%= muestra.temperatura %></td>
-        <td><%= link_to 'Show', muestra %></td>
+        <td><%= Tarea.find(muestra.tarea_id).nombre %></td>
+        <% if(@can_create) %>
+        <td><%= link_to 'mostrar mas', muestra %></td>
         <td><%= link_to 'Edit', edit_muestra_path(muestra) %></td>
         <td><%= link_to 'Destroy', muestra, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
     <% end %>
@@ -30,5 +34,5 @@
 
 <br>
 
-<%= link_to 'New Muestra', new_muestra_path %>
+<%= link_to 'Nueva Muestra', new_muestra_path %>
 <%= link_to 'Back', muestreos_path %>

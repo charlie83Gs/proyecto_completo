@@ -6,7 +6,7 @@ class ProyectosController < ApplicationController
   def index
     @proyectos = Proyecto.all
     @can_create = false
-    if current_user.permission > 1
+    if current_user.permission > 0
       @can_create = true
     end
   end

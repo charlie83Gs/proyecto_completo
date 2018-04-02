@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :nombre %>
+    <%= form.label :Alias %>
     <%= form.text_field :nombre, id: :empleado_nombre %>
   </div>
 
@@ -20,13 +20,8 @@
     <%= form.label :descripcion %>
     <%= form.text_area :descripcion, id: :empleado_descripcion %>
   </div>
-
-  <div class="field">
-    <%= form.label :tipo %>
-    <%= form.number_field :tipo, id: :empleado_tipo %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
+  
 <% end %>

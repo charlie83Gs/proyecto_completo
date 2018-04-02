@@ -20,12 +20,13 @@
     <%= form.label :descripcion %>
     <%= form.text_area :descripcion, id: :tarea_descripcion %>
   </div>
-
-   <div class="field">
-    <%= form.label :pro_type %>
-    <%= form.number_field :pro_type, id: :tarea_pro_type %>
+    <div>
+      <%= form.label :pro_type %>
+      <%= form.select :pro_type, options_for_select([ "Productiva", "Colaborativa","Improductiva"], "Productiva"),id: :tarea_pro_type %>
   </div>
-
+  <div>
+    <p> </p>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

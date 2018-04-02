@@ -4,7 +4,15 @@ class EmpleadosController < ApplicationController
   # GET /empleados
   # GET /empleados.json
   def index
-    @empleados = Empleado.all
+    
+    if params[:from_proyecto]
+        session[:proyecto_id] = params[:proyecto_id]
+    end
+    proy_id = session[:proyecto_id].to_i
+    @empleados = Empleado.where(proyecto_id: proy_id).all
+    if(@empleados == nil)
+        @empleados = {}
+    end
   end
 
   # GET /empleados/1
@@ -24,7 +32,11 @@ class EmpleadosController < ApplicationController
   # POST /empleados
   # POST /empleados.json
   def create
-    @empleado = Empleado.new(empleado_params)
+    local_params = empleado_params;
+    local_params[:tipo] = 0;
+    local_params[:proyecto_id] = session[:proyecto_id]
+
+    @empleado = Empleado.new(local_params)
 
     respond_to do |format|
       if @empleado.save
@@ -40,6 +52,9 @@ class EmpleadosController < ApplicationController
   # PATCH/PUT /empleados/1
   # PATCH/PUT /empleados/1.json
   def update
+    local_params = empleado_params;
+    local_params[:tipo] = 0;
+    local_params[:proyecto_id] = session[:proyecto_id]
     respond_to do |format|
       if @empleado.update(empleado_params)
         format.html { redirect_to @empleado, notice: 'Empleado was successfully updated.' }

@@ -24,8 +24,20 @@ class TareasController < ApplicationController
   # POST /tareas
   # POST /tareas.json
   def create
-    @tarea = Tarea.new(tarea_params)
+    local_params = tarea_params
+    #productivo son 2 puntos
+    #colaborativo 1 puntos
+    #improductivo 0 puntos
+    if(local_params[:pro_type] == "Productiva")
+        local_params[:pro_type] = 2;
+    elsif(local_params[:pro_type] == "Colaborativa")
+        local_params[:pro_type] = 1;
+    else
+        local_params[:pro_type] = 0;
+    end
 
+    @tarea = Tarea.new(local_params)
+    puts("My object: #{@tarea_params.inspect}") 
     respond_to do |format|
       if @tarea.save
         format.html { redirect_to @tarea, notice: 'Tarea was successfully created.' }
@@ -40,8 +52,19 @@ class TareasController < ApplicationController
   # PATCH/PUT /tareas/1
   # PATCH/PUT /tareas/1.json
   def update
+    local_params = tarea_params
+    #productivo son 2 puntos
+    #colaborativo 1 puntos
+    #improductivo 0 puntos
+    if(local_params[:pro_type] == "Productiva")
+        local_params[:pro_type] = 2;
+    elsif(local_params[:pro_type] == "Colaborativa")
+        local_params[:pro_type] = 1;
+    else
+        local_params[:pro_type] = 0;
+    end
     respond_to do |format|
-      if @tarea.update(tarea_params)
+      if @tarea.update(local_params)
         format.html { redirect_to @tarea, notice: 'Tarea was successfully updated.' }
         format.json { render :show, status: :ok, location: @tarea }
       else

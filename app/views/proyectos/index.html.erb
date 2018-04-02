@@ -19,7 +19,10 @@
         <td><%= link_to 'Show', proyecto %></td>
         <td><%= link_to 'Edit', edit_proyecto_path(proyecto) %></td>
         <td><%= link_to 'Destroy', proyecto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><td><%= link_to 'Muestreos', muestreos_path(:proyecto_id => proyecto.id, :from_proyecto => true) %></td></td>
+        <td><%= link_to 'Muestreos', muestreos_path(:proyecto_id => proyecto.id, :from_proyecto => true) %></td>
+        <% if @can_create == true %>
+        <<td><%= link_to 'Empleados', empleados_path(:proyecto_id => proyecto.id, :from_proyecto => true) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -27,7 +30,8 @@
 
 <br>
 <% if @can_create == true %>
-<%= link_to 'New Proyecto', new_proyecto_path%>
+<%= link_to 'Nuevo Proyecto', new_proyecto_path%>
 <%= link_to 'Administrar Tareas', tareas_path%>
+<%= link_to 'Administrar Usuarios', "administrar/permisos"%>
 <% end %>
-
+<%= link_to('Logout', destroy_user_session_path, method: :get) %>  
