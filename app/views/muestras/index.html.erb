@@ -33,6 +33,59 @@
 </table>
 
 <br>
-
 <%= link_to 'Nueva Muestra', new_muestra_path %>
-<%= link_to 'Back', muestreos_path %>
+<br>
+<p>
+  <h1>Horas de muestra</h1>
+</p>
+<table>
+  <thead>
+  <tr>
+  <th> Dia </th>
+  <th> Hora </th>
+  </tr>
+  </thead>
+<% @horarios.each do |sc| %>
+  <tbody>
+  <tr>
+    <% if(Time.now - sc.hora < 0) %>
+    <td><%= sc.hora.strftime('%F') %></td>
+    <td><%= sc.hora.strftime('%I:%M:%S %p') %></td>
+    <% end %>
+  </tr>
+  
+  </tbody>
+<% end %>
+</table>
+<br>
+
+<p>
+  <h1>Observaciones</h1>
+</p>
+
+<table>
+  <thead>
+  <tr>
+  <th> Dia </th>
+  <th> Hora </th>
+  <th> Datos </th>
+  <th></th>
+  </tr>
+  </thead>
+<% @observaciones.each do |ob| %>
+  <tbody>
+  <tr>
+    <td><%= ob.created_at.strftime('%F') %></td>
+    <td><%= ob.created_at.strftime('%I:%M:%S %p') %></td>
+    <td><%= ob.descripcion%></td>
+    <td><%= link_to 'Show', ob %></td>
+  </tr>
+  
+  </tbody>
+<% end %>
+</table>
+<br>
+
+
+<%= link_to 'Nueva Observacion', new_observacion_path %>
+<%= link_to 'Volver', muestreos_path %>

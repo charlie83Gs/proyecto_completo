@@ -20,5 +20,26 @@
   <%= @muestreo.proyecto_id %>
 </p>
 
+<p>
+	<strong>Horas de muestra</strong>
+</p>
+<table>
+	<thead>
+	<tr>
+	<th> Dia </th>
+	<th> Hora </th>
+	</tr>
+	</thead>
+<% @horarios.each do |sc| %>
+	<tbody>
+	<tr>
+		<td><%= sc.hora.strftime('%F') %></td>
+		<td><%= sc.hora.strftime('%I:%M:%S %p') %></td>
+	</tr>
+	
+	</tbody>
+<% end %>
+</table>
+<br>
 <%= link_to 'Edit', edit_muestreo_path(@muestreo) %> |
 <%= link_to 'Back', muestreos_path %>

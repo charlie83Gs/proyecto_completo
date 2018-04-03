@@ -16,9 +16,11 @@
       <tr>
         <td><%= proyecto.fecha_inicio %></td>
         <td><%= proyecto.descripcion %></td>
+        <% if(current_user.permission > 0) %>
         <td><%= link_to 'Show', proyecto %></td>
         <td><%= link_to 'Edit', edit_proyecto_path(proyecto) %></td>
         <td><%= link_to 'Destroy', proyecto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
         <td><%= link_to 'Muestreos', muestreos_path(:proyecto_id => proyecto.id, :from_proyecto => true) %></td>
         <% if @can_create == true %>
         <<td><%= link_to 'Empleados', empleados_path(:proyecto_id => proyecto.id, :from_proyecto => true) %></td>
@@ -34,4 +36,3 @@
 <%= link_to 'Administrar Tareas', tareas_path%>
 <%= link_to 'Administrar Usuarios', "administrar/permisos"%>
 <% end %>
-<%= link_to('Logout', destroy_user_session_path, method: :get) %>  

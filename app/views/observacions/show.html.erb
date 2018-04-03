@@ -4,6 +4,7 @@
   <strong>Descripcion:</strong>
   <%= @observacion.descripcion %>
 </p>
-
+<% if(current_user.permission > 0) %>
 <%= link_to 'Edit', edit_observacion_path(@observacion) %> |
-<%= link_to 'Back', observacions_path %>
+<% end %>
+<%= link_to 'Back', muestras_path %>

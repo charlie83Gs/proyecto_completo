@@ -4,11 +4,11 @@ class MuestrasController < ApplicationController
   # GET /muestras
   # GET /muestras.json
   def index
-    @muestras = Muestra.all
+    
     if params[:from_muestreo]
         session[:muestreo_id] = params[:muestreo_id]
     end
-    
+    @muestras = Muestra.where(muestreo_id: session[:muestreo_id]).all
     @muest_id = session[:muestreo_id].to_i
     #@empleados = Empleado.where(proyecto_id: session[:proyecto_id].to_i).all
     #puts(@proy_id)
@@ -16,6 +16,19 @@ class MuestrasController < ApplicationController
     if current_user.permission > 0
       @can_create = true
     end
+    if(@muestras == nil)
+        @muestras = {}
+    end
+
+    @horarios = Schedule.where(muestreo_id: session[:muestreo_id]).all
+    if(@horarios == nil)
+      @horarios = {}
+    end
+     @observaciones = Observacion.where(muestreo_id: session[:muestreo_id]).all
+    if(@observaciones == nil)
+      @observaciones = {}
+    end
+    
   end
 
   # GET /muestras/1

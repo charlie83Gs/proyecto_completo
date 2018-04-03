@@ -25,8 +25,14 @@
     <%= form.label :meta %>
     <%= form.number_field :meta, id: :muestreo_meta %>
   </div>
-
-
+  <div class="field">
+    <%= form.label :minimo_intervalo_minutos %>
+    <%= form.number_field :minimo, id: :muestro_minimo %>
+  </div>
+  <div class="field">
+    <%= form.label :maximo_intervalo_minutos %>
+    <%= form.number_field :maximo, id: :muestro_maximo %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

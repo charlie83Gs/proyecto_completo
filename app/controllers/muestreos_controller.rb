@@ -6,8 +6,6 @@ class MuestreosController < ApplicationController
   def index
     
 
-    
-  
     if params[:from_proyecto]
         session[:proyecto_id] = params[:proyecto_id]
     end
@@ -22,7 +20,10 @@ class MuestreosController < ApplicationController
   # GET /muestreos/1
   # GET /muestreos/1.json
   def show
-
+    @horarios = Schedule.where(muestreo_id: @muestreo.id).all
+    if(@horarios == nil)
+      @horarios = {}
+    end
   end
 
   # GET /muestreos/new
@@ -40,18 +41,29 @@ class MuestreosController < ApplicationController
 
     local_params = muestreo_params
     local_params[:proyecto_id] = session[:proyecto_id]
-
+    
     @muestreo = Muestreo.new(local_params)
     #@id = local_params
     #render inline: "<%= @id %> "
     respond_to do |format|
       if @muestreo.save
+        total = local_params[:meta].to_i
+        time = Time.now
+        minimo = local_params[:minimo].to_i
+        maximo = local_params[:maximo].to_i
+        #puts total
+        #puts local_params
+        for i in 0..total
+            Schedule.create({muestreo_id: @muestreo.id, hora: time})
+            time = time + (minimo + rand((maximo - minimo).abs)).minutes
+        end
         format.html { redirect_to @muestreo, notice: 'Muestreo was successfully created.' }
         format.json { render :show, status: :created, location: @muestreo }
       else
         format.html { render :new }
         format.json { render json: @muestreo.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -75,6 +87,8 @@ class MuestreosController < ApplicationController
   # DELETE /muestreos/1
   # DELETE /muestreos/1.json
   def destroy
+    Muestra.where(muestreo_id: @muestreo.id).delete_all
+    Schedule.where(muestreo_id: @muestreo.id).delete_all
     @muestreo.destroy
     respond_to do |format|
       format.html { redirect_to muestreos_url, notice: 'Muestreo was successfully destroyed.' }
@@ -90,6 +104,6 @@ class MuestreosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def muestreo_params
-      params.require(:muestreo).permit(:fecha_inicio, :fecha_fin, :meta, :proyecto_id)
+      params.require(:muestreo).permit(:fecha_inicio, :fecha_fin, :meta, :proyecto_id,:minimo,:maximo)
     end
 end

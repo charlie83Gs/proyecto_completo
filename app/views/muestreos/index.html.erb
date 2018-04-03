@@ -19,9 +19,11 @@
         <td><%= muestreo.fecha_fin %></td>
         <td><%= muestreo.meta %></td>
         <td><%= muestreo.proyecto_id %></td>
+        <% if(current_user.permission > 0) %>
         <td><%= link_to 'Show', muestreo %></td>
         <td><%= link_to 'Edit', edit_muestreo_path(muestreo) %></td>
         <td><%= link_to 'Destroy', muestreo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
         <td><%= link_to 'Muestras', muestras_path(muestreo_id: muestreo.id, from_muestreo: true) %></td>
       </tr>
     <% end %>
@@ -31,4 +33,5 @@
 <br>
 
 <%= link_to 'Nuevo Muestreo', new_muestreo_path %>
+
 <%= link_to 'Volver', proyectos_path %>

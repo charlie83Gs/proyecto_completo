@@ -24,7 +24,9 @@ class ObservacionsController < ApplicationController
   # POST /observacions
   # POST /observacions.json
   def create
-    @observacion = Observacion.new(observacion_params)
+    local_params = observacion_params
+    local_params[:muestreo_id] = session[:muestreo_id]
+    @observacion = Observacion.new(local_params)
 
     respond_to do |format|
       if @observacion.save
